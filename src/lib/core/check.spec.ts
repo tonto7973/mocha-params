@@ -36,6 +36,11 @@ describe('Check', () => {
         it('should not throw exception when argument is Array', () => {
             expect(() => Check.isArray([])).to.not.throw();
         });
+        it('should return input argument', () => {
+            const input = [1];
+            const result = Check.isArray(input);
+            expect(result).to.equal(input);
+        });
     });
 
     describe('isFunction', () => {
@@ -71,6 +76,11 @@ describe('Check', () => {
         });
         it('should not throw exception when argument is Function', () => {
             expect(() => Check.isFunction(() => 0)).to.not.throw();
+        });
+        it('should return input argument', () => {
+            const input = () => 0;
+            const result = Check.isFunction(input);
+            expect(result).to.equal(input);
         });
     });
 

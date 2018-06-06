@@ -4,16 +4,16 @@ describe('expectify', () => {
 
     it('should throw error when argument 0 (args) is not array', () => {
         const arg: any = undefined;
-        expect(() => expectify(arg)).to.throw('Argument 0 is not an array, got [Undefined] instead');
+        expect(() => expectify(arg)).to.throw();
     });
 
-    it('should resolve undefined argument', () => {
+    it('should resolve undefined as a string', () => {
         const arg = [undefined];
         const result = expectify(arg);
         expect(result).to.equal('[undefined]');
     });
 
-    it('should resolve function arguments', () => {
+    it('should resolve function as a special character', () => {
         const arg = [() => 0];
         const result = expectify(arg);
         expect(result).to.equal('[\u0192]');

@@ -1,6 +1,9 @@
 // mocha global configuration file
-const expect = require('chai').expect;
-const context = (typeof window !== 'undefined' ? window : (typeof global !== 'undefined' ? global : this));
-context.expect = expect;
+const chai = require('chai'),
+      spies = require('chai-spies'),
+      context = (typeof window !== 'undefined' ? window : (typeof global !== 'undefined' ? global : this));
 
+chai.use(spies);
+context.chai = chai;
+context.expect = chai.expect;
 process.env.TS_NODE_CACHE = false;

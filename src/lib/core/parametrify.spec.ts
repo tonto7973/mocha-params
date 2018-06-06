@@ -37,7 +37,7 @@ describe('parametrify', () => {
         });
         it('should return clone of first runnable with correct expectation', () => {
             class DummyRunnable {
-                constructor(private expectation: string, private assertion?: any) { }
+                constructor(expectation: string, assertion?: any) { }
             }
             const testRunnable = new DummyRunnable('');
             const getArgs: any = () => [['a']];
@@ -50,7 +50,7 @@ describe('parametrify', () => {
         it('should resolve timeout() when specified in runnable', () => {
             let totalTimeout = 0;
             class DummyRunnable {
-                constructor(private expectation: string, private assertion?: any) { }
+                constructor(expectation: string, assertion?: any) { }
                 timeout(n: number) { totalTimeout += n; }
             }
             const getArgs: any = () => [['a'], ['b']];
@@ -62,7 +62,7 @@ describe('parametrify', () => {
         it('should resolve retries() when specified in runnable', () => {
             let totalRetries = 0;
             class DummyRunnable {
-                constructor(private expectation: string, private assertion?: any) { }
+                constructor(expectation: string, assertion?: any) { }
                 retries(n: number) { totalRetries += n; }
             }
             const getArgs: any = () => [['a'], ['b']];
@@ -74,7 +74,7 @@ describe('parametrify', () => {
         it('should resolve slow() when specified in runnable', () => {
             const totalSlow: number[] = [];
             class DummyRunnable {
-                constructor(private expectation: string, private assertion?: any) { }
+                constructor(expectation: string, assertion?: any) { }
                 slow(n: number) { totalSlow.push(n); }
             }
             const getArgs: any = () => [['a'], ['b'], ['c']];
@@ -85,7 +85,7 @@ describe('parametrify', () => {
         });
         it('should resolve async runnable', () => {
             class DummyRunnable {
-                constructor(private expectation: string, private assertion?: any) { }
+                constructor(expectation: string, assertion?: any) { }
                 async = 1;
             }
             const getArgs: any = () => [[1, true], [2, false], [8, null], [9, undefined]];
@@ -97,7 +97,7 @@ describe('parametrify', () => {
         it('should resolve parent, ctx and file of the first runnable', () => {
             let testParent = 0, testCtx = 1, testFile = 2;
             class DummyRunnable {
-                constructor(private expectation: string, private assertion?: any) { }
+                constructor(expectation: string, assertion?: any) { }
                 parent = testParent++;
                 ctx = testCtx++;
                 file = testFile++;
@@ -116,7 +116,7 @@ describe('parametrify', () => {
             const original: any = (expectation: string, assertion?: any) => new DummyRunnable(expectation, assertion);
             const spy = chai.spy(original);
             const pit = parametrify(getArgs, spy);
-            const result = pit('message');
+            pit('message');
             expect(spy).to.have.been.called.once.with('message \x1b[35m[0]');
         });
         it('should call original test definition with unmodified assertion when not a function', () => {
@@ -127,7 +127,7 @@ describe('parametrify', () => {
             const original: any = (expectation: string, assertion?: any) => new DummyRunnable(expectation, assertion);
             const spy = chai.spy(original);
             const pit = parametrify(getArgs, spy);
-            const result = pit('w', 32 as any);
+            pit('w', 32 as any);
             expect(spy).to.have.been.called.once.with('w \x1b[35m[true]', 32 as any);
         });
         it('should call original test definition with parametrized assertion', () => {

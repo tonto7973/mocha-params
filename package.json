@@ -49,7 +49,8 @@
       "./.mocha/**/*",
       "./.nyc_output/**/*",
       "**/*.d.ts",
-      "**/*.spec.ts"
+      "**/*.spec.ts",
+      "./src/lib/interfaces/**"
     ],
     "include": [
       "./src/**/*"

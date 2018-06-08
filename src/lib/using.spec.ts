@@ -38,6 +38,14 @@ describe('using', () => {
             const test = using(2);
             expect(test.using(7)).to.equal(test);
         });
+        it('should throw error when using has no arguments', () => {
+            const test = (using as any);
+            expect(() => test()).to.throw('Got no arguments for using 1');
+        });
+        it('should throw error when nested using has no arguments', () => {
+            const test = using(1) as any;
+            expect(() => test.using(3).using()).to.throw('Got no arguments for using 3');
+        });
         it('should throw error when nested using has different number of arguments', () => {
             const test = using(1) as any;
             expect(() => test.using(true, false)).to.throw('Expecting 1 argument but got 2 for using [true, false]');
@@ -64,9 +72,17 @@ describe('using', () => {
         it('should execute assertion in it() with done() as last argument', () => {
             const spy = chai.spy();
             context.it = (e: string, a: any) => a(spy) && new Object();
-            const result: any[] = [];
             (using as any)(true, 1).using(false, 2).it('e', (a1: any, a2: any, done: any) => done());
             expect(spy).to.have.been.called.exactly(2);
+        });
+        it('should call it() the number of times using is declared', () => {
+            const result: Array<string> = [];
+            context.it = (e: string, a: any) => {
+                result.push(e);
+                return new Object();
+            };
+            using(/w/).using(null).using(undefined).it('pex', arg => { });
+            expect(result.length).to.equal(3);
         });
         it('should call xit() the number of times using is declared', () => {
             const result: Array<string> = [];

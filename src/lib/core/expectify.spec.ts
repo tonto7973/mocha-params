@@ -20,9 +20,9 @@ describe('expectify', () => {
     });
 
     it('should resolve any arguments', () => {
-        const arg = ['x', 1, true, false, null, undefined, {}, [], () => 1, new Date('2018-03-01T20:03:13.999Z')];
+        const arg = ['x', 1, /w/i, Symbol(), true, false, null, undefined, {}, [], () => 1, new Date('2018-03-01T20:03:13.999Z')];
         const result = expectify(arg);
-        expect(result).to.equal('["x", 1, true, false, null, undefined, {}, [], \u0192, "2018-03-01T20:03:13.999Z"]');
+        expect(result).to.equal('["x", 1, /w/i, #, true, false, null, undefined, {}, [], \u0192, "2018-03-01T20:03:13.999Z"]');
     });
 
 });

@@ -1,37 +1,15 @@
 import { IUsing } from './interfaces/iusing';
 import { using as $using } from './using';
 
-const context = typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : typeof window !== 'undefined' ? window : { };
-const using: <T>(arg: T) => IUsing<T> = $using.bind(context);
-
 describe('using', () => {
 
-    const runItTestCase = (message: string, fn: () => IUsing<any>) => {
-        const results: Array<{
-            expectation: string,
-            assertion: (done?: MochaDone) => Array<any>,
-            timeout?: number,
-            args?: Array<any>
-        }> = [];
-        const originalIt = context.it;
-        try {
-            context.it = function(expectation: string, assertion: (done?: MochaDone) => Array<any>, timeout?: number) {
-                results.push({
-                    expectation: expectation,
-                    assertion: assertion,
-                    timeout: timeout,
-                    args: assertion()
-                });
-            };
-            fn().it(message, function() {
-                return [].slice.call(arguments);
-            });
-        }
-        finally {
-            context.it = originalIt;
-        }
-        return results;
-    };
+    const context: any = { };
+    const using: <T>(arg: T) => IUsing<T> = $using.bind(context);
+
+    beforeEach(() => {
+        context.it = () => new Object();
+        context.xit = () => new Object();
+    });
 
     describe('wrapper', () => {
         it('should return wrapper around it()', () => {
@@ -39,10 +17,12 @@ describe('using', () => {
             expect(test.it).to.be.a('function');
         });
         it('should return wrapper around it.only()', () => {
+            context.it.only = () => new Object();
             const test = using(1);
             expect(test.it.only).to.be.a('function');
         });
         it('should return wrapper around it.skip()', () => {
+            context.it.skip = () => new Object();
             const test = using(1);
             expect(test.it.skip).to.be.a('function');
         });
@@ -58,36 +38,45 @@ describe('using', () => {
             const test = using(2);
             expect(test.using(7)).to.equal(test);
         });
+        it('should throw error when nested using has different number of arguments', () => {
+            const test = using(1) as any;
+            expect(() => test.using(true, false)).to.throw('Expecting 1 argument but got 2 for using [true, false]');
+        });
+        it('should throw error when nested using has different number of arguments', () => {
+            const test = (using as any)(1, 2);
+            expect(() => test.using(7)).to.throw('Expecting 2 arguments but got 1 for using [7]');
+        });
     });
 
     describe('execution', () => {
-        it('should execute it() the number of times using is declared', function() {
-            const result = runItTestCase('any', () => using('a').using('b').using('c').using(1));
-            expect(result.length).to.equal(4);
+        it('should execute assertion in it() the number of times using is declared', () => {
+            context.it = (e: string, a: any) => a() && new Object();
+            let result = 0;
+            using('a').using('b').using('c').using(1).it('exp', arg => { result++; });
+            expect(result).to.equal(4);
         });
-        it('should execute it() with proper arguments', function() {
-            const result = runItTestCase('any', () => using('z').using(4).using([]))
-                .map(r => r.args && r.args[0]);
+        it('should execute assertion in it() with proper arguments', () => {
+            context.it = (e: string, a: any) => a() && new Object();
+            const result: any[] = [];
+            using('z').using(4).using([]).it('e', arg => { result.push(arg); });
             expect(result).to.deep.equal(['z', 4, []]);
         });
-    });
-
-    describe('test', () => {
-        using(null).
-        using(undefined).
-            it('should check if argument is null or undefined', arg => {
-                expect(arg === null || arg === undefined).to.equal(true);
-            });
-    });
-
-    describe('async', () => {
-        using(1).
-        using(2).
-        using('string#').
-            it('should run done as the last argument', (arg, done) => {
-                expect(done).to.be.a('function');
-                done();
-            });
+        it('should execute assertion in it() with done() as last argument', () => {
+            const spy = chai.spy();
+            context.it = (e: string, a: any) => a(spy) && new Object();
+            const result: any[] = [];
+            (using as any)(true, 1).using(false, 2).it('e', (a1: any, a2: any, done: any) => done());
+            expect(spy).to.have.been.called.exactly(2);
+        });
+        it('should call xit() the number of times using is declared', () => {
+            const result: Array<string> = [];
+            context.xit = (e: string, a: any) => {
+                result.push(e);
+                return new Object();
+            };
+            using(/a/).using(new Date()).using(3).using(Symbol()).using(undefined).xit('exp', arg => { });
+            expect(result.length).to.equal(5);
+        });
     });
 
 });

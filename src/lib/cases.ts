@@ -1,8 +1,7 @@
-import { ICases } from './interfaces/icases';
 import { expectify } from './core/expectify';
 import { wrap } from './core/wrap';
 
-export function cases<T>(): ICases<T> {
+export function cases<T>(): Mocha.ICasesTestWrapper<T> {
     const runs: Array<any> = [].slice.call(arguments)
         .map((arg: any) => Array.isArray(arg) ? arg : [arg]);
 

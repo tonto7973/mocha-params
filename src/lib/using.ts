@@ -1,8 +1,7 @@
-import { IUsing } from './interfaces/iusing';
 import { expectify } from './core/expectify';
 import { wrap } from './core/wrap';
 
-export function using<T>(arg: T): IUsing<T> {
+export function using<T>(arg: T): Mocha.IUsingTestWrapper<T> {
     const runs = [[].slice.call(arguments)];
 
     if (runs[0].length === 0) {

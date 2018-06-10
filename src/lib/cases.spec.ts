@@ -1,10 +1,9 @@
-import { ICases } from './interfaces/icases';
 import { cases as $cases } from './cases';
 
 describe('cases', () => {
 
     const context: any = { };
-    const cases: <T, V>(...cases: Array<T | V>) => ICases<T | V> = $cases.bind(context);
+    const cases: <T, V>(...cases: Array<T | V>) => Mocha.ICasesTestWrapper<T | V> = $cases.bind(context);
 
     beforeEach(() => {
         context.it = () => new Object();

@@ -12,14 +12,14 @@
     "emitDecoratorMetadata": true,
     "outDir": "./dist",
     "typeRoots": [
-      "node_modules/@types",
-      ".mocha"
+      "node_modules/@types"
     ]
   },
-  "include": [
-    "./src/**/*"
+  "files": [
+    "./src/index.d.ts",
+    "./src/globals.d.ts"
   ],
-  "exclude": [
-    "./src/index.d.ts"
+  "include": [
+    "./src/**/*.ts"
   ]
 }

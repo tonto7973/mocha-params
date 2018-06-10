@@ -17,4 +17,10 @@ Object.defineProperty(exports, 'using', {
     enumerable: true
 });
 
-export declare const using: any;
+export declare function using(...arg: any[]): Mocha.IUsingTestWrapper<any>;
+export declare function using<T>(arg: T): Mocha.IUsingTestWrapper<T>;
+export declare namespace using {
+    type NotArray<T> = T & Exclude<T, any[]>;
+    function cases(...arg: Array<any[]>): Mocha.IAnyCasesTestWrapper;
+    function cases<T>(arg: NotArray<T>): Mocha.ICasesTestWrapper<T>;
+}

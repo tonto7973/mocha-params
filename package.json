@@ -10,9 +10,9 @@
     "build": "npm run clean && npm run lint && npm run test && tsc -p tsconfig.build.json --listEmittedFiles true --diagnostics true && cp src/index.d.ts dist/",
     "clean": "rimraf dist && rimraf .nyc_output && rimraf coverage",
     "lint": "tslint -p tsconfig.json",
-    "tdd": "npm run clean && mocha -r .mocha/config.js -r ts-node/register src/**/*.spec.ts --watch-extensions ts --watch",
-    "test": "nyc mocha -r .mocha/config.js -r ts-node/register -r source-map-support/register src/**/*.spec.ts",
-    "e2e.node": "mocha -r .mocha/config.js -r ts-node/register e2e/test/*.spec.ts",
+    "tdd": "npm run clean && mocha -r mocha.conf.js -r ts-node/register src/**/*.spec.ts --watch-extensions ts --watch",
+    "test": "nyc mocha -r mocha.conf.js -r ts-node/register -r source-map-support/register src/**/*.spec.ts",
+    "e2e.node": "mocha -r mocha.conf.js -r ts-node/register e2e/test/*.spec.ts",
     "e2e.browser": "karma start e2e/karma.conf.js"
   },
   "keywords": [

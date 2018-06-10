@@ -1,10 +1,9 @@
-import { IUsing } from './interfaces/iusing';
 import { using as $using } from './using';
 
 describe('using', () => {
 
     const context: any = { };
-    const using: <T>(arg: T) => IUsing<T> = $using.bind(context);
+    const using: <T>(arg: T) => Mocha.IUsingTestWrapper<T> = $using.bind(context);
 
     beforeEach(() => {
         context.it = () => new Object();

@@ -1,8 +1,6 @@
 import rewire = require('rewire');
 import * as index from './index';
 
-declare const global: any;
-
 describe('index', () => {
 
     describe('export', () => {

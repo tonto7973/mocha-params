@@ -12,6 +12,14 @@ export const expectify = (args: Array<any>) => {
             current = '/' + current.source + '/' + current.flags;
         } else if (type(current) === '[Symbol]') {
             current = '#';
+        } else if (type(current) === '[Number]' && current === Infinity) {
+            current = '\u221E';
+        } else if (type(current) === '[Number]' && current === -Infinity) {
+            current = '-\u221E';
+        } else if (type(current) === '[Number]' && isNaN(current)) {
+            current = 'NaN';
+        } else if (type(current) === '[Number]' && current === 0 && 1 / current < 0) {
+            current = '-0';
         } else {
             current = JSON.stringify(current);
         }

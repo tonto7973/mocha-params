@@ -19,6 +19,12 @@ describe('expectify', () => {
         expect(result).to.equal('[\u0192]');
     });
 
+    it('should resolve any number', () => {
+        const arg = [1, Infinity, -Infinity, NaN, -NaN, 0, -0];
+        const result = expectify(arg);
+        expect(result).to.equal('[1, \u221E, -\u221E, NaN, NaN, 0, -0]');
+    });
+
     it('should resolve any arguments', () => {
         const arg = ['x', 1, /w/i, Symbol(), true, false, null, undefined, {}, [], () => 1, new Date('2018-03-01T20:03:13.999Z')];
         const result = expectify(arg);

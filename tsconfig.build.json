@@ -3,6 +3,9 @@
   "compilerOptions": {
     "sourceMap": false
   },
+  "include": [
+    "./src/**/*.ts"
+  ],
   "exclude": [
     "./src/**/*.spec.ts"
   ]

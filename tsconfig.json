@@ -20,6 +20,7 @@
     "./src/globals.d.ts"
   ],
   "include": [
-    "./src/**/*.ts"
+    "./src/**/*.ts",
+    "./e2e/**/*.ts"
   ]
 }

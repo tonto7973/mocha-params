@@ -4,10 +4,9 @@
   "description": "Parametrized test cases for Mocha",
   "author": "Ondrej Urik",
   "license": "MIT",
-  "main": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
   "scripts": {
-    "build": "npm run clean && npm run lint && npm run test && tsc -p tsconfig.build.json --listEmittedFiles true --diagnostics true && cp src/index.d.ts dist/",
+    "dist": "npm run clean && npm run lint && npm run test && npm run build && node dist.js",
+    "build": "tsc -p tsconfig.build.json --listEmittedFiles true --diagnostics true",
     "clean": "rimraf dist && rimraf .nyc_output && rimraf coverage",
     "lint": "tslint -p tsconfig.json",
     "tdd": "npm run clean && mocha -r mocha.conf.js -r ts-node/register src/**/*.spec.ts --watch-extensions ts --watch",

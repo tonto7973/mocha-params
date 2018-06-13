@@ -10,7 +10,6 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "removeComments": true,
     "outDir": "./dist",
     "typeRoots": [
       "node_modules/@types"

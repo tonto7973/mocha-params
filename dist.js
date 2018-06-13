@@ -17,6 +17,9 @@ const tasks = {
         });
     },
     run: () => {
+        console.log('');
+        console.log('running dist');
+        console.log('---------------------');
         tasks.tasks.every(task => {
             console.log('' + task.name);
             try {

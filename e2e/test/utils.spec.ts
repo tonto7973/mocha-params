@@ -1,4 +1,4 @@
-/// <reference path="spec.d.ts" />
+/// <reference path="utils.d.ts" />
 import { Utils } from './utils';
 import { using } from './../../src/index';
 

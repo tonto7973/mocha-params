@@ -1,11 +1,12 @@
 # mocha-using
 
-> Parametrized unit tests for [Mocha](https://github.com/mochajs/mocha). **Works with Mocha >=5.2**
+> Parametrized unit tests for [Mocha](https://github.com/mochajs/mocha).
+> **Requires Mocha >=5.2**
 
 ## Installation
 
 ```sh
-npm install mocha-using --save-dev
+npm install --save-dev mocha mocha-using
 ```
 
 ## Registration
@@ -25,7 +26,7 @@ This will register a global `using()` function that can be used in any test file
 To use mocha-using in on a per file basis, add the line below to your test files:
 
 ```
-const using = require('mocha-using');
+const using = require('mocha-using').using;
 ```
 
 ## Usage

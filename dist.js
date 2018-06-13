@@ -58,7 +58,6 @@ tasks.add('setup typings', () => {
             data += line;
         }
     });
-    data += '\r\nexport default using;\r\n';
     write('index.d.ts', data);
 });
 

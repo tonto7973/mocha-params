@@ -1,21 +1,22 @@
 import { using as using$ } from './lib/using';
 import { cases as cases$ } from './lib/cases';
 
-declare const exports: any;
+declare const module: any;
 
-Object.defineProperty(exports, 'using', {
-    get: () => {
-        const context =
-            typeof self !== 'undefined' ? self :
-            typeof window !== 'undefined' ? window :
-            typeof global !== 'undefined' ? global :
-            { };
-        const result = using$.bind(context);
-        result.cases = cases$.bind(context);
-        return result;
-    },
-    enumerable: true
-});
+const context =
+    typeof self !== 'undefined' ? self :
+    typeof window !== 'undefined' ? window :
+    typeof global !== 'undefined' ? global : /* istanbul ignore next */
+    { };
+
+const default$ = (() => {
+    const result = using$.bind(context);
+    result.cases = cases$.bind(context);
+    result.using = result;
+    return result;
+})();
+
+module.exports = default$;
 
 export declare function using<T>(arg: T): Mocha.IUsingTestWrapper<T>;
 export declare function using<T1, T2>(arg1: T1, arg2: T2): Mocha.IUsingTestWrapper2<T1, T2>;

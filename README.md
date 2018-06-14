@@ -1,6 +1,6 @@
 ﻿# mocha-params
 
-> Parametrized unit tests for [Mocha](https://github.com/mochajs/mocha). _Requires Mocha >=5.2_
+_Parametrized unit tests for [Mocha](https://github.com/mochajs/mocha). Requires Mocha >=5.2_
 
 ## Installation
 
@@ -10,35 +10,29 @@ npm install --save-dev mocha mocha-params
 
 ## Setup
 
-### Global
-
-You can register mocha-params with:
-
-```sh
-mocha -r mocha-params/register
-```
-
-This will register a global `using()` function that can be used in any test file and you can skip the step below.
-
-### Per file
-
-To use mocha-params in on a per file basis, add the line below to your test files:
+Import mocha-params into your test file:
 
 ```javascript
-const using = require('mocha-params');
+const using = require('mocha-params'); // javascript
 ```
-
-or
 
 ```typescript
-import { using } from 'mocha-params';
+import { using } from 'mocha-params'; // typescript
 ```
+
+Optionally, you can register mocha-params globally with mocha:
+
+```sh
+mocha -r mocha-params/register ... src/**/*.spec.js
+```
+
+This will register a global `using()` function that can be used in any test file passed to mocha.
 
 ## Usage
 
-There are two styles you can choose to parametrize your unit tests:
+There are two styles you can use to parametrize your unit tests:
 
-> `using(...)` style
+> `using(...)`
 
 ```javascript
 // multiple arguments
@@ -51,9 +45,9 @@ using(arg2).
     it('expectation', function(value[, done]) { });
 ```
 
-or the above can be rewritten as:
+or the above can be rewritten with:
 
-> `using.cases(...)` style
+> `using.cases(...)`
 
 ```javascript
 // multiple arguments
@@ -67,7 +61,7 @@ using.cases(arg1, arg2). // 1st and 2nd test case
     it('expectation', function(value[, done]) { });
 ```
 
-#### Basic parametrized test
+### Basic parametrized test
 
 Prepend `it` statements with `using` and pass argument to assertions:
 
@@ -83,7 +77,7 @@ The result will display as:
 ```
 √ should be one [1]
 ```
-#### Multiple test cases
+### Multiple test cases
 
 Chain `using` to create multiple test cases:
 
@@ -115,7 +109,7 @@ The result will display as:
 
 #### Multiple arguments
 
-Pass multiple arguments to `using` and use them in `it` statement:
+Pass multiple arguments to `using` and use them in `it` statements:
 
 ```javascript
 using(1, 'bus').
@@ -144,16 +138,16 @@ The result will display as:
 √ should be a number followed by a string [2, "cars"]
 ```
 
-Please note that the number of arguments in chained using() must be the same. Otherwise `using` or `using.cases` will throw an error. For example the following will throw an exception:
+Please note that the number of arguments per test case must be the same. Otherwise `using` or `using.cases` will throw an error. For example the following will fail:
 
 ```javascript
 using(1, 'bus').using(2).it('a', n => { });
-// ^^^ WILL THROW AN EXCEPTION ^^^
+// ^^^ WILL THROW AN ERROR ^^^
 ```
 
 ## Async
 
-Add the `done` argument at the end of argument list in it statements:
+Add the `done` argument at the end of argument list in `it` statements:
 
 ```javascript
 using(1, 'bus').

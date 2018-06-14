@@ -1,37 +1,37 @@
-﻿# mocha-using
+﻿# mocha-params
 
 > Parametrized unit tests for [Mocha](https://github.com/mochajs/mocha). _Requires Mocha >=5.2_
 
 ## Installation
 
 ```sh
-npm install --save-dev mocha mocha-using
+npm install --save-dev mocha mocha-params
 ```
 
 ## Setup
 
 ### Global
 
-You can register mocha-using with:
+You can register mocha-params with:
 
 ```sh
-mocha -r mocha-using/register
+mocha -r mocha-params/register
 ```
 
 This will register a global `using()` function that can be used in any test file and you can skip the step below.
 
 ### Per file
 
-To use mocha-using in on a per file basis, add the line below to your test files:
+To use mocha-params in on a per file basis, add the line below to your test files:
 
 ```javascript
-const using = require('mocha-using');
+const using = require('mocha-params');
 ```
 
 or
 
 ```typescript
-import { using } from 'mocha-using';
+import { using } from 'mocha-params';
 ```
 
 ## Usage

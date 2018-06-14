@@ -1,5 +1,5 @@
 {
-  "name": "mocha-using",
+  "name": "mocha-params",
   "version": "1.0.0",
   "description": "Parametrized test cases for Mocha",
   "author": "Ondrej Urik",

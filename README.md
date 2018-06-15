@@ -8,6 +8,27 @@ _Parametrized unit tests for [Mocha](https://github.com/mochajs/mocha). Requires
 npm install --save-dev mocha mocha-params
 ```
 
+## Example
+
+```typescript
+import { expect } from 'chai';
+import { using } from 'mocha-params';
+import { Utils } from './utils';
+
+describe('Utils', () => {
+    describe('isEmpty', () => {
+        using(null).
+        using(undefined).
+            it('should return true when value is null or undefined', value => {
+                const result = Utils.isEmpty(value);
+                expect(result).to.equal(true);
+            });
+    });
+});
+```
+
+![Screenshot](screenshot.png)
+
 ## Setup
 
 Import mocha-params into your test file:
@@ -107,7 +128,7 @@ The result will display as:
 √ should be a string ["c"]
 ```
 
-#### Multiple arguments
+### Multiple arguments
 
 Pass multiple arguments to `using` and use them in `it` statements:
 

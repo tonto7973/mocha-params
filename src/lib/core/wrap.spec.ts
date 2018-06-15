@@ -82,7 +82,7 @@ describe('wrap', () => {
         const getRuns = () => [[1]];
         const context = {
             it: (expectation: string, assertion?: any) => {
-                result.expectation = expectation;
+                result.expectation = expectation.replace(/\x1b\[[0-9]+m/g, '');
                 assertion();
                 return new Object();
             }
@@ -91,7 +91,7 @@ describe('wrap', () => {
         const pit = wrap(getRuns, context, 'it');
         pit('ecspcs', ast);
         expect(result).to.deep.equal({
-            expectation: 'ecspcs \x1b[35m[1]',
+            expectation: 'ecspcs [1]',
             arg: 1
         });
     });

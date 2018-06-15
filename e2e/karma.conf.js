@@ -18,6 +18,7 @@ module.exports = config => {
                 extensions: ['.ts', '.js']
             },
             module: {
+                exprContextCritical: false,
                 rules: [
                     {
                         test: /\.ts$/,
@@ -25,6 +26,9 @@ module.exports = config => {
                         exclude: [/node_modules/]
                     }
                 ]
+            },
+            node: {
+                fs: 'empty'
             }
         },
         reporters: ['mocha'],

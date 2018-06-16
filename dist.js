@@ -36,8 +36,9 @@ const tasks = {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 tasks.add('copy readme and license', () => {
-    copy('README.md');
     copy('LICENSE');
+    copy('README.md');
+    copy('screenshot.png');
 });
 
 tasks.add('setup package.json', () => {

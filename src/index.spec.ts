@@ -1,29 +1,24 @@
-import rewire = require('rewire');
-import * as index from './index';
-
 describe('index', () => {
 
     describe('export', () => {
+        const index = require('./index');
         it('should export default as a function', () => {
-            const using = index;
-            expect(using).to.be.a('function');
+            expect(index).to.be.a('function');
         });
         it('should export default.cases as a function', () => {
-            const using: any = index;
-            expect(using.cases).to.be.a('function');
+            expect(index.cases).to.be.a('function');
         });
         it('should export using as a function', () => {
-            const using = index.using;
-            expect(using).to.be.a('function');
+            expect(index.using).to.be.a('function');
         });
         it('should export using.cases as a function', () => {
-            const using = index.using;
-            expect(using.cases).to.be.a('function');
+            expect(index.using.cases).to.be.a('function');
         });
     });
 
     describe('global context', () => {
         beforeEach(() => {
+            delete require.cache[require.resolve('./index')];
             delete global.self;
             delete global.window;
         });
@@ -37,8 +32,8 @@ describe('index', () => {
                 xit: () => new Object()
             };
             global.self = context;
-            const rewiredIndex = rewire('./index');
-            const using = rewiredIndex.using;
+            const index = require('./index');
+            const using = index.using;
             using(1).it('a');
             expect(context.it).to.have.been.called();
         });
@@ -48,8 +43,8 @@ describe('index', () => {
                 it: () => new Object()
             };
             global.window = context;
-            const rewiredIndex = rewire('./index');
-            const using = rewiredIndex.using;
+            const index = require('./index');
+            const using = index.using;
             using(2).xit('b');
             expect(context.xit).to.have.been.called();
         });

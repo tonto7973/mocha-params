@@ -27,7 +27,7 @@ describe('Utils', () => {
 });
 ```
 
-![Screenshot](https://github.com/tonto7973/mocha-params/blob/master/screenshot.png)
+![Screenshot](screenshot.png)
 
 ## Setup
 

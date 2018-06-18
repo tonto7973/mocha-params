@@ -1,21 +1,6 @@
 import { Check } from './check';
 import { expectify } from './expectify';
-
-declare const process: any;
-declare const require: any;
-
-const colorify = (() => {
-    const param = 'param';
-    const isBrowser = typeof process !== 'undefined' && process.browser;
-    const mocha = isBrowser ? null : require('mocha');
-    const base = mocha && mocha.reporters && mocha.reporters.Base;
-
-    if (base) {
-        base.colors[param] = 35;
-    }
-
-    return (str: string) => base ? base.color(param, str) : str;
-})();
+import { colorify } from './colorify';
 
 export const parametrify = (getArgs: () => Array<any>, original: (expectation: string, assertion?: (done?: MochaDone) => void) => any) => {
     Check.isFunction(getArgs);

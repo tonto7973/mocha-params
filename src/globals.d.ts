@@ -13,10 +13,6 @@ declare namespace mock {
     }
 }
 
-interface NodeRequire extends NodeRequireFunction {
-    eject: (id: string) => void;
-}
-
 declare function expect(target: any, message?: string): Chai.Assertion;
 declare const mock: mock.Mock;
 declare const self: any;

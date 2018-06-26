@@ -7,7 +7,6 @@ describe('register', () => {
 
     describe('global context', () => {
         beforeEach(() => {
-            delete require.cache[require.resolve('./register')];
             delete (global as any).self;
             delete (global as any).window;
         });

@@ -9,6 +9,5 @@ chai.use(spies);
 context.chai = chai;
 context.expect = chai.expect;
 context.mock = mock;
-require.eject = path => { try { delete require.cache[require.resolve(path)]; } catch (ex) { }; };
 
 process.env.TS_NODE_CACHE = false;

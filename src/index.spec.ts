@@ -18,7 +18,6 @@ describe('index', () => {
 
     describe('global context', () => {
         beforeEach(() => {
-            require.eject('./index');
             delete (global as any).self;
             delete (global as any).window;
         });
@@ -32,7 +31,7 @@ describe('index', () => {
                 xit: () => new Object()
             };
             (global as any).self = context;
-            const index = require('./index');
+            const index = mock.reRequire('./index');
             const using = index.using;
             using(1).it('a');
             expect(context.it).to.have.been.called();
@@ -43,7 +42,7 @@ describe('index', () => {
                 it: () => new Object()
             };
             (global as any).window = context;
-            const index = require('./index');
+            const index = mock.reRequire('./index');
             const using = index.using;
             using(2).xit('b');
             expect(context.xit).to.have.been.called();

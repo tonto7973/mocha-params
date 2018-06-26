@@ -18,20 +18,20 @@ describe('index', () => {
 
     describe('global context', () => {
         beforeEach(() => {
-            delete require.cache[require.resolve('./index')];
-            delete global.self;
-            delete global.window;
+            require.eject('./index');
+            delete (global as any).self;
+            delete (global as any).window;
         });
         afterEach(() => {
-            delete global.self;
-            delete global.window;
+            delete (global as any).self;
+            delete (global as any).window;
         });
         it('should use self as context when provided', () => {
             const context = {
                 it: chai.spy(() => new Object()),
                 xit: () => new Object()
             };
-            global.self = context;
+            (global as any).self = context;
             const index = require('./index');
             const using = index.using;
             using(1).it('a');
@@ -42,7 +42,7 @@ describe('index', () => {
                 xit: chai.spy(() => new Object()),
                 it: () => new Object()
             };
-            global.window = context;
+            (global as any).window = context;
             const index = require('./index');
             const using = index.using;
             using(2).xit('b');

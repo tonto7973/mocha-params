@@ -1,15 +1,8 @@
-declare const process: any;
-declare const require: any;
 
 export const colorify = (() => {
     const param = 'param';
-    const isBrowser = typeof process !== 'undefined' && process.browser;
-    const mocha = isBrowser ? null : require('mocha');
-    const base = mocha && mocha.reporters && mocha.reporters.Base;
+    const isBrowser = typeof process !== 'undefined' && (process as any).browser;
+    const chalk = isBrowser ? null : require('chalk');
 
-    if (base) {
-        base.colors[param] = 35;
-    }
-
-    return (str: string): string => base ? base.color(param, str) : str;
+    return (str: string): string => chalk ? chalk.magenta(str) : str;
 })();

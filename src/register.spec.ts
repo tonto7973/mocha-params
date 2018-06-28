@@ -24,22 +24,22 @@ describe('register', () => {
         });
         it('should define using when self context defined', () => {
             (global as any).self = global;
-            require('./register');
+            mock.reRequire('./register');
             expect(self.using).to.be.a('function');
         });
         it('should define using.cases when self context defined', () => {
             (global as any).self = global;
-            require('./register');
+            mock.reRequire('./register');
             expect(self.using.cases).to.be.a('function');
         });
         it('should define using when window context defined', () => {
             (global as any).window = global;
-            require('./register');
+            mock.reRequire('./register');
             expect(window.using).to.be.a('function');
         });
         it('should define using.cases when window context defined', () => {
             (global as any).window = global;
-            require('./register');
+            mock.reRequire('./register');
             expect(window.using.cases).to.be.a('function');
         });
     });

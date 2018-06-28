@@ -18,21 +18,20 @@ describe('index', () => {
 
     describe('global context', () => {
         beforeEach(() => {
-            delete require.cache[require.resolve('./index')];
-            delete global.self;
-            delete global.window;
+            delete (global as any).self;
+            delete (global as any).window;
         });
         afterEach(() => {
-            delete global.self;
-            delete global.window;
+            delete (global as any).self;
+            delete (global as any).window;
         });
         it('should use self as context when provided', () => {
             const context = {
                 it: chai.spy(() => new Object()),
                 xit: () => new Object()
             };
-            global.self = context;
-            const index = require('./index');
+            (global as any).self = context;
+            const index = mock.reRequire('./index');
             const using = index.using;
             using(1).it('a');
             expect(context.it).to.have.been.called();
@@ -42,8 +41,8 @@ describe('index', () => {
                 xit: chai.spy(() => new Object()),
                 it: () => new Object()
             };
-            global.window = context;
-            const index = require('./index');
+            (global as any).window = context;
+            const index = mock.reRequire('./index');
             const using = index.using;
             using(2).xit('b');
             expect(context.xit).to.have.been.called();

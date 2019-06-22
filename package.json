@@ -1,6 +1,6 @@
 {
   "name": "mocha-params",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Parametrized test cases for Mocha",
   "author": "Ondrej Urik",
   "license": "MIT",

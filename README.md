@@ -1,6 +1,6 @@
 ﻿# mocha-params
 
-_Parametrized unit tests for [Mocha](https://github.com/mochajs/mocha). Requires Mocha >=5.2_
+_Parametrized unit tests for [Mocha](https://github.com/mochajs/mocha). Requires Mocha >=6.2_
 
 ## Installation
 

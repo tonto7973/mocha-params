@@ -47,7 +47,7 @@
     "chai-spies": "1.0.0",
     "chalk": "2.4.1",
     "cross-env": "5.1.6",
-    "karma": "5.0.1",
+    "karma": "6.3.14",
     "karma-chrome-launcher": "2.2.0",
     "karma-mocha": "2.0.0",
     "karma-mocha-reporter": "2.2.5",
